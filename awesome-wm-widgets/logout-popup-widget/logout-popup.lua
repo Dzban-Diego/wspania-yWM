@@ -99,7 +99,7 @@ local function launch(args)
                         accent_color, label_color, onreboot, icon_size, icon_margin),
                     create_button('moon', 'Suspend (u)',
                         accent_color, label_color, onsuspend, icon_size, icon_margin),
-                    create_button('power', 'Power Off (s)',
+                    create_button('power', 'Power Off (q)',
                         accent_color, label_color, onpoweroff, icon_size, icon_margin),
                     id = 'buttons',
                     spacing = 8,
@@ -133,7 +133,7 @@ local function launch(args)
                 phrase_widget:set_text('')
                 capi.keygrabber.stop()
                 w.visible = false
-            elseif key == 's' then onpoweroff()
+            elseif key == 'q' then onpoweroff()
             elseif key == 'r' then onreboot()
             elseif key == 'u' then onsuspend()
             elseif key == 'k' then onlock()
