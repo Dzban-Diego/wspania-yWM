@@ -9,33 +9,32 @@ local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightne
 
 modkey = "Mod4"
 
--- {{{ Key bindings
-globalkeys = gears.table.join(
+-- Awesome
+awful.keyboard.append_global_keybindings({
 
-  -- Awesome
-  awful.key(                                                        { modkey, },            ",",
+  awful.key(                                                        { modkey, },            ".",
     function ()
       awful.spawn('variety -n')
     end,
-    {description="Następna tapeta", group="awesome"}
+    {description="Następna tapeta", group="Funkcyjne"}
   ),
-  awful.key(                                                        { modkey, },            ".",
+  awful.key(                                                        { modkey, },            ",",
     function ()
       awful.spawn('variety -p')
     end,
-    {description="Poprzednia tapeta", group="awesome"}
+    {description="Poprzednia tapeta", group="Funkcyjne"}
   ),
   awful.key(                                                        { modkey, },            "F1",
     hotkeys_popup.show_help,
-    {description="Pomoc", group="awesome"}
+    {description="Pomoc", group="Funkcyjne"}
   ),
   awful.key(                                                        { modkey, },            "XF86MonBrightnessDown",
     hotkeys_popup.show_help,
-    {description="Pomoc", group="awesome"}
+    {description="Pomoc", group="Funkcyjne"}
   ),
   awful.key(                                                        { modkey, "Control" },  "r",
     awesome.restart,
-    {description = "Odświerz awesome", group = "awesome"}
+    {description = "Odświerz awesome", group = "Funkcyjne"}
   ),
   awful.key(                                                        { modkey, "Shift" },    "q",
     function ()
@@ -43,17 +42,17 @@ globalkeys = gears.table.join(
           phrases = {'NARRA'}
         })
     end,
-    {description = "Wyłącz", group = "awesome"}
+    {description = "Wyłącz", group = "Funkcyjne"}
   ),
   awful.key(                                                        { modkey },             "=", 
     function ()
       awful.screen.focused().myOwnWidget.visible = not awful.screen.focused().myOwnWidget.visible
-    end, {description = "Pokaż systrey", group = "awesome"}
+    end, {description = "Pokaż systrey", group = "Funkcyjne"}
   ),
   awful.key(                                                          { modkey },             "-",
     function ()
       awful.screen.focused().mywibox.visible = not awful.screen.focused().mywibox.visible
-    end, {description = "Pokaż wibar", group = "awesome"}
+    end, {description = "Pokaż wibar", group = "Funkcyjne"}
   ),
 
   -- Istotne
@@ -95,7 +94,7 @@ globalkeys = gears.table.join(
   ),
   awful.key(                                                        { modkey, },             ";",
     function ()
-        awful.spawn("setxkbmap pl -variant colemak_dh");
+        awful.spawn("setxkbmap pl -variant colemak_dh_ansi");
     end,
     {description = "zmien układ klawiatury - colemak", group = "Istotne"}
   ),
@@ -171,6 +170,12 @@ globalkeys = gears.table.join(
     end,
     {description = "Terminal", group = "Odpal"}
   ),
+  awful.key(                                                        { modkey, },            "m",
+    function ()
+      awful.spawn('minecraft-launcher')
+    end,
+    {description = "Kloce", group = "Odpal"}
+  ),
   awful.key(                                                        { modkey, },            "c",
     function ()
       awful.spawn('rofi -show calc')
@@ -197,7 +202,7 @@ globalkeys = gears.table.join(
   ),
   awful.key(                                                        { modkey, },            "v",
     function ()
-      awful.spawn('code')
+      awful.spawn('code_dmenu')
     end,
     {description = "VSC", group = "Odpal"}
   ),
@@ -269,7 +274,8 @@ globalkeys = gears.table.join(
     end,
     {description = "Poprzedni układ", group = "Układ"}
   ),
-  awful.key(                                                        { "Mod1", },           "`",
+
+  awful.key(                                                        { modkey, },           "Page_Up",
     function ()
       awful.screen.focus_relative( 1 )
     end,
@@ -330,9 +336,7 @@ globalkeys = gears.table.join(
     end,
     {description = "", group = "Audio"}
   )
-
-
-)
+})
 
 clientkeys = gears.table.join(
   -- Okno
@@ -359,7 +363,7 @@ clientkeys = gears.table.join(
     end,
     {description = "Ustaw jako główne okno", group = "Okno"}
   ),
-  awful.key(                                                        { "Mod1", "Shift" },     "`",
+  awful.key(                                                        { modkey },     "Page_Down",
     function (c)
       c:move_to_screen()
     end,
