@@ -17,7 +17,7 @@ theme.font       = "Hack Nerd Font 15"
 theme.wibar_height = 30
 theme.wibar_border_width = 0
 theme.wibar_opacity = 0.9
-theme.wibar_bg = '#363636'
+theme.wibar_bg = '#000000'
 
 theme.rounded = 10
 
@@ -32,13 +32,11 @@ theme.fg_normal  = colors.white_fg_normal  --czcionka
 theme.fg_focus   = colors.white_fg_focus  --zaznaczona czcionka
 theme.fg_urgent  = "#000000"  --holera wie
 theme.bg_normal  = theme.wibar_bg  --tło
-theme.bg_focus   = "#1a0000"-- theme.wibar_bg  --zaznaczone tło
+theme.bg_focus   = "#333333"-- theme.wibar_bg  --zaznaczone tło
 theme.bg_urgent  = "#ff00ff"  --tez holera wie
 theme.bg_systray = colors.white_bg_normal
 
 theme.taglist_fg_occupied = '#000000'
-
-theme.systray_bg = '#ff00ff'
 
 theme.hotkeys_border_color = '#ff00ff'
 

@@ -77,7 +77,7 @@ local function worker(user_args)
     -- One way of creating a pop-up notification - naughty.notify
     local notification
     local function show_battery_status(batteryType)
-        awful.spawn.easy_async([[bash -c 'acpi | tail -n 1']],
+        awful.spawn.easy_async([[bash -c 'acpi']],
         function(stdout, _, _, _)
             naughty.destroy(notification)
             notification = naughty.notify{

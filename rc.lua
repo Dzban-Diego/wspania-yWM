@@ -114,7 +114,7 @@ end
 
 mylauncher = awful.widget.launcher({
    image = beautiful.awesome_icon,
-   menu = mymainmenu 
+   menu = mymainmenu
 })
 
 -- Menubar configuration
@@ -185,7 +185,8 @@ awful.screen.connect_for_each_screen(function(s)
    --set_wallpaper(s)
 
    -- Each screen has its own tag table.
-   awful.tag({ " ", " ", "﬏ ", " ", " " }, s, awful.layout.layouts[1])
+   awful.tag({ " ", " ", "﬏ ", " ", " " }, s, awful.layout.layouts[0])
+   -- awful.tag({ "1" }, s, awful.layout.layouts[0])
 
    -- Create a promptbox for each screen
    s.mypromptbox = awful.widget.prompt()
@@ -317,7 +318,7 @@ awful.screen.connect_for_each_screen(function(s)
    s.myOwnWidget = wibox.widget {
       {
          {
-            widget = mysystrey,         
+            widget = mysystrey,
          },
          top = 5,
          bottom = 5,
@@ -361,20 +362,11 @@ awful.screen.connect_for_each_screen(function(s)
       { -- Right widgets
          {
             layout = wibox.layout.fixed.horizontal,
-            
-            
-            spotify_widget({
-               font = 'SF Pro bold 9',
-               play_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg',
-               pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg',
-               dim_when_paused = true,
-               max_length = 0.1,
-            }),
             cpu_widget({
                width = 40,
                step_width = 2,
                step_spacing = 0,
-               color = '#434c5e',
+               color = '#ffffff',
             }),
             battery_widget(),
             volume_widget{
@@ -406,7 +398,7 @@ root.keys(globalkeys)
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
-   
+
    -- Spotify
    { rule = {
       class = "Spotify"
@@ -428,7 +420,7 @@ awful.rules.rules = {
         screen = 1,
         -- tag = awful.screen.focused().tags[2]
     }},
-   
+
     { rule = {
     class = "code"
     },properties = {
@@ -441,12 +433,12 @@ awful.rules.rules = {
     },properties = {
        tag = awful.screen.focused().tags[1],
       shape = rectangle,
-      
+
     }},
 
    -- All clients will match this rule.
    { rule = { },
-   properties = { 
+   properties = {
       border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
       focus = awful.client.focus.filter,
@@ -551,7 +543,7 @@ client.connect_signal("button::pressd", function(c)
 end)
 
 
-client.connect_signal("focus", function(c) 
+client.connect_signal("focus", function(c)
   c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

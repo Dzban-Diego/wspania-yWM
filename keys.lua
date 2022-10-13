@@ -92,6 +92,18 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "SS", group = "Istotne"}
   ),
+  awful.key(                                                        { modkey, "Shift" },             "Page_Down",
+    function ()
+        awful.spawn("curl https://svr21.supla.org/direct/1620/SNVQs4DMjPko/down-or-stop");
+    end,
+    {description = "zmien układ klawiatury - colemak", group = "Istotne"}
+  ),
+  awful.key(                                                        { modkey, "Shift" },             "Page_Up",
+    function ()
+        awful.spawn("curl https://svr21.supla.org/direct/1620/SNVQs4DMjPko/up-or-stop");
+    end,
+    {description = "zmien układ klawiatury - colemak", group = "Istotne"}
+  ),
   awful.key(                                                        { modkey, },             ";",
     function ()
         awful.spawn("setxkbmap pl -variant colemak_dh_ansi");
