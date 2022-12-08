@@ -19,7 +19,7 @@ theme.wibar_border_width = 0
 theme.wibar_opacity = 0.9
 theme.wibar_bg = '#000000'
 
-theme.rounded = 10
+theme.rounded = 3
 
 local colors = {}
 colors.pinki_fg_normal = "#ff87d7"
@@ -60,7 +60,7 @@ theme.notification_icon_size = 70
 
 -- {{{ Borders
 theme.useless_gap   = 4
-theme.border_width  = 1
+theme.border_width  = 2
 theme.border_normal = "#3F3F3F"
 theme.border_focus  = '#707070'
 theme.border_marked = "#CC9393"

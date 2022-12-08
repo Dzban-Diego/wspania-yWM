@@ -44,7 +44,7 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "Wyłącz", group = "Funkcyjne"}
   ),
-  awful.key(                                                        { modkey },             "=", 
+  awful.key(                                                        { modkey },             "=",
     function ()
       awful.screen.focused().myOwnWidget.visible = not awful.screen.focused().myOwnWidget.visible
     end, {description = "Pokaż systrey", group = "Funkcyjne"}
@@ -174,7 +174,7 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "Przywróć zminimalizowane okno", group = "Okno"}
   ),
-  
+
   -- Odpal
   awful.key(                                                        { modkey, },            "Return",
     function ()
@@ -202,9 +202,15 @@ awful.keyboard.append_global_keybindings({
   ),
   awful.key(                                                        { modkey, },            "r",
     function ()
-      awful.spawn('dmenu_run -l -i -p Program: -fn Hack')
+      awful.spawn('run.sh')
     end,
     {description = "Znajdź program", group = "Odpal"}
+  ),
+  awful.key(                                                        { modkey, 'Shift'},            "r",
+      function ()
+          awful.spawn('dmenu_run -l -i -p Program: -fn Hack')
+      end,
+      {description = "Znajdź więcej programów", group = "Odpal"}
   ),
   awful.key(                                                        { modkey, },            "b",
     function ()
@@ -260,7 +266,7 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "youtube", group = "Odpal"}
   ),
-  
+
   -- Układ
   awful.key(                                                        { modkey, "Shift"},     "Right",
     function ()
@@ -280,7 +286,7 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "Następny układ", group = "Układ"}
   ),
-  awful.key(                                                        { modkey, "Shift" },    "`", 
+  awful.key(                                                        { modkey, "Shift" },    "`",
     function ()
       awful.layout.inc(-1)
     end,
@@ -294,7 +300,7 @@ awful.keyboard.append_global_keybindings({
   {description = "Zmień ekran", group = "Układ"}
   ),
 
-  -- Funkcyjne  
+  -- Funkcyjne
   awful.key(                                                        { modkey },             "Control_R",
     function()
       awful.spawn('./.scripts/chfunc.sh')

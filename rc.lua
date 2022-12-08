@@ -14,6 +14,8 @@ require("awful.hotkeys_popup.keys")
 require("collision")()
 require("keys")
 
+local capi = { screen = screen, mouse = mouse }
+
 -- {{{ Error handling
 if awesome.startup_errors then
   naughty.notify({ preset = naughty.config.presets.critical,
@@ -36,6 +38,15 @@ do
     end)
 end
 -- }}}
+
+require("tag-list")
+
+local function pointer ()
+    local widget = capi.mouse.current_wibox
+    if widget then
+        widget.cursor = "hand2"
+    end
+end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -121,6 +132,10 @@ mylauncher = awful.widget.launcher({
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+local rounded = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, 3)
+end
+
 -- {{{ Wibar
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -185,7 +200,7 @@ awful.screen.connect_for_each_screen(function(s)
    --set_wallpaper(s)
 
    -- Each screen has its own tag table.
-   awful.tag({ " ", " ", "﬏ ", " ", " " }, s, awful.layout.layouts[0])
+   awful.tag({ " ", " ", "﬏ ", " ", " " }, s, awful.layout.layouts[1])
    -- awful.tag({ "1" }, s, awful.layout.layouts[0])
 
    -- Create a promptbox for each screen
@@ -206,7 +221,7 @@ awful.screen.connect_for_each_screen(function(s)
       screen  = s,
       filter  = awful.widget.taglist.filter.all,
       style = {
-         shape = gears.shape.rounded_bar,
+         shape = rounded
       },
       widget_template = {
          {
@@ -216,8 +231,6 @@ awful.screen.connect_for_each_screen(function(s)
                   id     = 'index_role',
                   widget = wibox.widget.textbox,
                },
-               --margins = 10,
-               left = 10,
                widget  = wibox.container.margin,
                },
                {
@@ -226,8 +239,10 @@ awful.screen.connect_for_each_screen(function(s)
                },
                layout = wibox.layout.fixed.horizontal,
             },
-            left  = 5,
+            left = 10,
             right = 5,
+            top = 2,
+            bottom = 2,
             widget = wibox.container.margin
          },
          id     = 'background_role',
@@ -242,7 +257,7 @@ awful.screen.connect_for_each_screen(function(s)
             widget = mytaglists
          },
          bg = '#575757',
-         shape = gears.shape.rounded_bar,
+         shape = rounded,
          widget = wibox.container.background,
       },
       top = 2,
@@ -258,7 +273,7 @@ awful.screen.connect_for_each_screen(function(s)
       filter  = awful.widget.tasklist.filter.currenttags,
       buttons = tasklist_buttons,
       style   = {
-         shape = gears.shape.rounded_bar
+         shape = rounded
       },
       layout   = {
          spacing_widget = {
@@ -312,8 +327,33 @@ awful.screen.connect_for_each_screen(function(s)
    local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
    local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
    local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+   local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 
-   -- systrey (hide)
+
+    mytextclock = wibox.widget.textclock()
+    -- default
+    local cw = calendar_widget()
+    -- or customized
+    local cw = calendar_widget({
+        theme = 'outrun',
+        placement = 'top_right',
+        radius = 8,
+        -- with customized next/previous (see table above)
+        previous_month_button = 1,
+        next_month_button = 3,
+    })
+
+    mytextclock:connect_signal("button::press",
+    function(_, _, _, button)
+        if button == 1 then cw.toggle() end
+    end)
+
+    mytextclock:connect_signal("button::enter",
+            function()
+                pointer()
+            end)
+
+    -- systrey (hide)
    mysystrey = wibox.widget.systray()
    s.myOwnWidget = wibox.widget {
       {
@@ -360,8 +400,8 @@ awful.screen.connect_for_each_screen(function(s)
       },
       s.mytasklist, -- Middle widget
       { -- Right widgets
-         {
-            layout = wibox.layout.fixed.horizontal,
+          {
+             layout = wibox.layout.fixed.horizontal,
             cpu_widget({
                width = 40,
                step_width = 2,
@@ -377,7 +417,7 @@ awful.screen.connect_for_each_screen(function(s)
                step = 10,
             }),
             s.myOwnWidget,
-            mynewTextclock,
+            mytextclock,
             logout_popup.widget{
                phrases = {'NARRA'}
             },
@@ -505,6 +545,7 @@ awful.rules.rules = {
       -- and the name shown there might not match defined rules here.
       name = {
          "Event Tester",  -- xev.
+         "splash",
       },
       role = {
          "AlarmWindow",  -- Thunderbird's calendar.
@@ -554,10 +595,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- awful.spawn.with_shell('uxplay')
 -- awful.spawn.with_shell('sudo obs')
 -- awful.spawn.with_shell('spotify')
-awful.spawn.with_shell('picom --experimental-backends --backend glx')
-awful.spawn.with_shell("xinput set-prop 10 'libinput Tapping Enabled' 1")
+awful.spawn.with_shell('picom -b')
+awful.spawn.with_shell("xinput set-prop 'Synaptics TM3276-022' 'libinput Tapping Enabled' 1")
 awful.spawn.with_shell("xrandr --output eDP-1 --mode 1920x1080 --pos 1920x120 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-2 --off")
-awful.spawn.with_shell('re.sonny.Tangram')
 awful.spawn.with_shell('kdeconnect-indicator')
 awful.spawn.with_shell('libinput-gestures-setup autostart start')
 awful.spawn.with_shell('bluetoothctl power on')
