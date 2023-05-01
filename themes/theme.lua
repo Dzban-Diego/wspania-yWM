@@ -13,7 +13,7 @@ local theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font       = "Hack Nerd Font 15"
+theme.font       = "Hack Nerd Font 11"
 theme.wibar_height = 30
 theme.wibar_border_width = 0
 theme.wibar_opacity = 0.9
@@ -84,7 +84,7 @@ theme.titlebar_bg_normal = "#ff00f0"
 -- titlebar_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- Example:
-theme.tasklist_font = "SF Pro 12"
+theme.tasklist_font = "SF Pro 5"
 theme.tasklist_shape_border_width = 2
 theme.tasklist_shape_border_color = theme.wibar_bg
 theme.tasklist_shape_border_bottom_width_focus = 5

@@ -78,7 +78,7 @@ local function launch(args)
     local onlock = args.onlock or function() awful.spawn.with_shell("i3lock") end
     local onreboot = args.onreboot or function() awful.spawn.with_shell("reboot") end
     local onsuspend = args.onsuspend or function() awful.spawn.with_shell("systemctl suspend") end
-    local onpoweroff = args.onpoweroff or function() awful.spawn.with_shell("shutdown now") end
+    local onpoweroff = args.onpoweroff or function() awful.spawn.with_shell("systemctl poweroff") end
 
     w:set_bg(bg_color)
     if #phrases > 0 then

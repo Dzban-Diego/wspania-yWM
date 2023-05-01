@@ -92,6 +92,12 @@ awful.keyboard.append_global_keybindings({
     end,
     {description = "SS", group = "Istotne"}
   ),
+  awful.key(                                                        { modkey, "Shift", 'Control' },             "Page_Up",
+      function ()
+          awful.spawn("curl https://svr21.supla.org/direct/1657/p6eNXL3kYN/toggle");
+      end,
+      {description = "Światło", group = "Istotne"}
+  ),
   awful.key(                                                        { modkey, "Shift" },             "Page_Down",
     function ()
         awful.spawn("curl https://svr21.supla.org/direct/1620/SNVQs4DMjPko/down-or-stop");

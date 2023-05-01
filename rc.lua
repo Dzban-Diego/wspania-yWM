@@ -39,7 +39,6 @@ do
 end
 -- }}}
 
-require("tag-list")
 
 local function pointer ()
     local widget = capi.mouse.current_wibox
@@ -527,7 +526,9 @@ awful.rules.rules = {
          "copyq",  -- Includes session name in class.
          "pinentry",
          "xzoom",
-         "zoom"
+         "zoom",
+         "emulator64-cras",
+         "qemu-system-x86",
       },
       class = {
          "Arandr",
@@ -539,6 +540,10 @@ awful.rules.rules = {
          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
          "Wpa_gui",
          "veromix",
+         "emulator64-cras",
+         "emulator",
+         "qemu",
+         "qemu-system-x86",
          "xtightvncviewer"},
 
       -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -546,6 +551,10 @@ awful.rules.rules = {
       name = {
          "Event Tester",  -- xev.
          "splash",
+         "qemu-system-x86",
+         "Android Emulator - Pixel:5554",
+         "emulator64-cras",
+         "Welcome to PhpStorm",
       },
       role = {
          "AlarmWindow",  -- Thunderbird's calendar.
@@ -596,10 +605,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- awful.spawn.with_shell('sudo obs')
 -- awful.spawn.with_shell('spotify')
 awful.spawn.with_shell('picom -b')
-awful.spawn.with_shell("xinput set-prop 'Synaptics TM3276-022' 'libinput Tapping Enabled' 1")
-awful.spawn.with_shell("xrandr --output eDP-1 --mode 1920x1080 --pos 1920x120 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-2 --off")
-awful.spawn.with_shell('kdeconnect-indicator')
-awful.spawn.with_shell('libinput-gestures-setup autostart start')
-awful.spawn.with_shell('bluetoothctl power on')
 awful.spawn.with_shell('variety -n')
--- awful.spawn.with_shell('bluetoothctl connect DC:2C:26:32:7F:01')
