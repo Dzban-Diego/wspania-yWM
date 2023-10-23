@@ -41,31 +41,17 @@ local key = function (modifier, key, func, descripion, group, c)
 end
 
 awful.keyboard.append_global_keybindings({
-  awful.key({Modkey}, "i", function ()
-    print('kupa')
-  end),
-  -- Ustawienie tapety
-  key(_, '.', 'variety -n', 'Następna tapeta', Functions),
-  key(_, ',', 'variety -p', 'Poprzednia tapeta', Functions),
+  key(_, 'nic', 'nic'),
   key(_, 'F1', hotkeys_popup.show_help, 'Pomoc', Awesome),
   key(Control, 'r', awesome.restart, 'Odświerz awesome', Awesome),
   key(Control, 'q', awesome.quit, 'Wyłącz awesome', Awesome),
   key(Shift, 'q',
     function ()
       logout_popup.launch({
-          phrases = { 'Do widzenia!' }
-        })
-    end, 'Wyloguj', Awesome),
-
-  key(_, '=', function ()
-      awful.screen.focused().customSysTrey.visible = not awful.screen.focused().customSysTrey.visible
-  end, 'Pokaż systrey', Functions),
-  key(_, '-', function ()
-      awful.screen.focused().mywibox.visible = not awful.screen.focused().mywibox.visible
-  end, 'Pokaż wibar', Functions),
-
-  key(_, 'a', connectAirPods, 'Połącz Airpodsy', Functions),
-  key(_, 'Print', 'flameshot gui', 'Zrób zrzut ekranu', Functions),
+        phrases = { 'Do widzenia!' }
+      })
+    end, 'Wyloguj', Awesome
+  ),
 
   -- Tags
   key(_, 'Left', awful.tag.viewprev, 'Poprzedni ekran', Tags),
@@ -85,7 +71,6 @@ awful.keyboard.append_global_keybindings({
   key(Shift, 'Up', function ()
     awful.client.swap.byidx(-1)
   end, 'Zamień okna odwrotnie', Client),
-
   key(Control, 'n', function ()
       local c = awful.client.restore()
       if c then
@@ -97,7 +82,7 @@ awful.keyboard.append_global_keybindings({
   -- Aplikacje
   key(_, 'Return', 'alacritty', 'Terminal', Apps),
   key(_, 'r', 'run.sh', 'Znajdź program', Apps),
-  key('shift', 'r' , 'dmenu_run -l -i -p Program: -fn SF Pro', 'Znajdź więcej programów', Apps),
+  key(Shift, 'r' , 'dmenu_run -l -i -p Program: -fn "SF Pro"', 'Znajdź więcej programów', Apps),
   key(_, 'b', 'thorium-browser', 'Przeglądarka', Apps),
   key(_, 'e', 'thunar', 'Pliki', Apps),
   key(_, 'z', 'zoom', 'Zoom', Apps),
@@ -111,8 +96,19 @@ awful.keyboard.append_global_keybindings({
     awful.tag.incmwfact(-0.05)
   end, 'Zwęź', Layout),
 
-
   -- Funkcyjne
+  key(_, 'a', connectAirPods, 'Połącz Airpodsy', Functions),
+  key(_, 'Print', 'flameshot gui', 'Zrób zrzut ekranu', Functions),
+  key(_, '.', 'variety -n', 'Następna tapeta', Functions),
+  key(_, ',', 'variety -p', 'Poprzednia tapeta', Functions),
+
+  key(_, '=', function ()
+      awful.screen.focused().customSysTrey.visible = not awful.screen.focused().customSysTrey.visible
+  end, 'Pokaż systrey', Functions),
+  key(_, '-', function ()
+      awful.screen.focused().mywibox.visible = not awful.screen.focused().mywibox.visible
+  end, 'Pokaż wibar', Functions),
+
   key({}, 'XF86MonBrightnessUp', function ()
     brightness_widget:inc()
   end, 'Jasniej', Functions),
