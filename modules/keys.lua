@@ -101,6 +101,7 @@ awful.keyboard.append_global_keybindings({
   key(_, 'Print', 'flameshot gui', 'Zrób zrzut ekranu', Functions),
   key(_, '.', 'variety -n', 'Następna tapeta', Functions),
   key(_, ',', 'variety -p', 'Poprzednia tapeta', Functions),
+  key(_, 'o', 'setxkbmap pl', 'Wlaczenie polskiej klawiatury', Functions),
 
   key(_, '=', function ()
       awful.screen.focused().customSysTrey.visible = not awful.screen.focused().customSysTrey.visible
@@ -117,22 +118,10 @@ awful.keyboard.append_global_keybindings({
   end, 'Ciemniej', Functions),
 
   -- Audio
-  key({}, "XF86AudioPrev",
-    function()
-      awful.spawn('playerctl previous')
-    end, 'Poprzedni utwór', Audio
-  ),
-  key({}, 'XF86AudioNext',
-    function ()
-      awful.spawn('playerctl next')
-    end, 'Następny utwór', Audio
-  ),
-  key({}, 'XF86AudioPlay',
-    function()
-      awful.spawn('playerctl play-pause')
-    end, 'Zatrzymaj/Odtwórz', Audio
-  ),
-  key({}, 'XF86AudioMute', volume_widget.toggle, 'Wycisz', Audio),
+  key({}, "XF86AudioPrev", 'playerctl previous', 'Poprzedni utwór', Audio),
+  key({}, 'XF86AudioNext', 'playerctl next', 'Następny utwór', Audio),
+  key({}, 'XF86AudioPlay', 'playerctl play-pause', 'Zatrzymaj/Odtwórz', Audio),
+  key({}, 'XF86AudioMute', function() volume_widget:toggle() end, 'Wycisz', Audio),
   key({}, 'XF86AudioRaiseVolume',
     function ()
       volume_widget:inc(5)

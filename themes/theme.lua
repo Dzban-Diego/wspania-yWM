@@ -64,7 +64,7 @@ theme.systray_icon_spacing = 5
 -- Calender
 theme.textbox_font = 'Hack 5'
 
-theme.tasklist_font = "SF Pro SemiBold 11"
+theme.tasklist_font = "SF Pro SemiBold 10"
 theme.tasklist_shape_border_width = 2
 theme.tasklist_shape_border_color = theme.wibar_bg
 theme.tasklist_shape_border_bottom_width_focus = 5
